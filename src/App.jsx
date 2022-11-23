@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./components/Navbar";
 import PrivateRoute from "./components/PrivateRoute";
 import Category from "./Pages/Category";
+import CreateListing from "./Pages/CreateListing";
 import Explore from "./Pages/Explore";
 import ForgetPassword from "./Pages/ForgetPassword";
 import Offers from "./Pages/Offers";
@@ -23,6 +24,7 @@ const App = () => {
             <Route path="/profile" element={<Profile />} />
           </Route>
           <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/create-listing" element={<CreateListing />} />
           <Route path="/offer" element={<Offers />} />
           <Route path="/category/:categoryName" element={<Category />} />
           <Route path="/forgot-password" element={<ForgetPassword />} />
