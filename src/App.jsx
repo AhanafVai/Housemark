@@ -4,6 +4,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./components/Navbar";
 import PrivateRoute from "./components/PrivateRoute";
+import Category from "./Pages/Category";
 import Explore from "./Pages/Explore";
 import ForgetPassword from "./Pages/ForgetPassword";
 import Offers from "./Pages/Offers";
@@ -23,6 +24,7 @@ const App = () => {
           </Route>
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/offer" element={<Offers />} />
+          <Route path="/category/:categoryName" element={<Category />} />
           <Route path="/forgot-password" element={<ForgetPassword />} />
         </Routes>
         <Navbar />
