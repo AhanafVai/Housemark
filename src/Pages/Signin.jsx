@@ -6,7 +6,7 @@ import { ReactComponent as ArrowRightIcon } from "../assets/svg/keyboardArrowRig
 import visibilityIcon from "../assets/svg/visibilityIcon.svg";
 import OAuth from "../components/OAuth";
 
-const SignIn = () => {
+const Signin = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -101,4 +101,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default Signin;

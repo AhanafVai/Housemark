@@ -8,7 +8,7 @@ import Explore from "./Pages/Explore";
 import ForgetPassword from "./Pages/ForgetPassword";
 import Offers from "./Pages/Offers";
 import Profile from "./Pages/Profile";
-import SignIn from "./Pages/SignIn";
+import SignIn from "./Pages/Signin";
 import SignUp from "./Pages/SignUp";
 
 const App = () => {
