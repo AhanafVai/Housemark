@@ -4,9 +4,11 @@ import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./components/Navbar";
 import PrivateRoute from "./components/PrivateRoute";
 import Category from "./Pages/Category";
+import Contact from "./Pages/Contact";
 import CreateListing from "./Pages/CreateListing";
 import Explore from "./Pages/Explore";
 import ForgetPassword from "./Pages/ForgetPassword";
+import Listing from "./Pages/Listing";
 import Offers from "./Pages/Offers";
 import Profile from "./Pages/Profile";
 import SignIn from "./Pages/Signin";
@@ -27,6 +29,11 @@ const App = () => {
           <Route path="/offer" element={<Offers />} />
           <Route path="/category/:categoryName" element={<Category />} />
           <Route path="/forgot-password" element={<ForgetPassword />} />
+          <Route
+            path="/category/:categoryName/:listingId"
+            element={<Listing />}
+          />
+          <Route path="/contact/:landlordId" element={<Contact />} />
         </Routes>
         <Navbar />
       </Router>
