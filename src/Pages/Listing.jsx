@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import AliceCarousel from "react-alice-carousel";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { Link, useNavigate, useParams } from "react-router-dom";
-
 import shareIcon from "../assets/svg/shareIcon.svg";
 import Spinner from "../components/Spinner";
 import { db } from "../firebase.config";

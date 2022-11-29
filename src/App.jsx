@@ -6,6 +6,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import Category from "./Pages/Category";
 import Contact from "./Pages/Contact";
 import CreateListing from "./Pages/CreateListing";
+import EditListing from "./Pages/EditListing";
 import Explore from "./Pages/Explore";
 import ForgetPassword from "./Pages/ForgetPassword";
 import Listing from "./Pages/Listing";
@@ -26,6 +27,7 @@ const App = () => {
           </Route>
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/create-listing" element={<CreateListing />} />
+          <Route path="/edit-listing/:listingId" element={<EditListing />} />
           <Route path="/offer" element={<Offers />} />
           <Route path="/category/:categoryName" element={<Category />} />
           <Route path="/forgot-password" element={<ForgetPassword />} />

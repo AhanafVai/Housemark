@@ -45,6 +45,7 @@ function Slider() {
             marginLeft: "auto",
             marginRight: "auto",
             width: "100%",
+            height: "400px",
           }}
         />
 
@@ -62,7 +63,7 @@ function Slider() {
       items: 2,
     },
     512: {
-      items: 4,
+      items: 3,
     },
   };
 

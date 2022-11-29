@@ -1,5 +1,5 @@
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { doc, getDoc, serverTimestamp, updateDoc } from "firebase/firestore";
 import {
   getDownloadURL,
   getStorage,
@@ -7,16 +7,17 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 import Spinner from "../components/Spinner";
 import { db } from "../firebase.config";
 
-const CreateListing = () => {
+const EditListing = () => {
   // eslint-disable-next-line
   const [geolocationEnabled, setGeolocationEnabled] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [listing, setListing] = useState(false);
   const [formData, setFormData] = useState({
     type: "rent",
     name: "",
@@ -51,8 +52,37 @@ const CreateListing = () => {
 
   const auth = getAuth();
   const navigate = useNavigate();
+  const params = useParams();
   const isMounted = useRef(true);
 
+  // Redirect if listing is not user's
+  useEffect(() => {
+    if (listing && listing.userRef !== auth.currentUser.uid) {
+      toast.error("You can not edit that listing");
+      navigate("/");
+    }
+  });
+
+  // Fetch listing to edit
+  useEffect(() => {
+    setLoading(true);
+    const fetchListing = async () => {
+      const docRef = doc(db, "listings", params.listingId);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setListing(docSnap.data());
+        setFormData({ ...docSnap.data(), address: docSnap.data().location });
+        setLoading(false);
+      } else {
+        navigate("/");
+        toast.error("Listing does not exist");
+      }
+    };
+
+    fetchListing();
+  }, [params.listingId, navigate]);
+
+  // Sets userRef to logged in user
   useEffect(() => {
     if (isMounted) {
       onAuthStateChanged(auth, (user) => {
@@ -81,11 +111,11 @@ const CreateListing = () => {
       return;
     }
 
-    if (images.length > 6) {
-      setLoading(false);
-      toast.error("Max 6 images");
-      return;
-    }
+    // if (images.length > 6) {
+    //   setLoading(false);
+    //   toast.error("Max 6 images");
+    //   return;
+    // }
 
     let geolocation = {};
     let location;
@@ -156,17 +186,17 @@ const CreateListing = () => {
       });
     };
 
-    const imgUrls = await Promise.all(
-      [...images].map((image) => storeImage(image))
-    ).catch(() => {
-      setLoading(false);
-      toast.error("Images not uploaded");
-      return;
-    });
+    // const imgUrls = await Promise.all(
+    //   [...images].map((image) => storeImage(image))
+    // ).catch(() => {
+    //   setLoading(false);
+    //   toast.error("Images not uploaded");
+    //   return;
+    // });
 
     const formDataCopy = {
       ...formData,
-      imgUrls,
+      //   imgUrls,
       geolocation,
       timestamp: serverTimestamp(),
     };
@@ -176,7 +206,9 @@ const CreateListing = () => {
     delete formDataCopy.address;
     !formDataCopy.offer && delete formDataCopy.discountedPrice;
 
-    const docRef = await addDoc(collection(db, "listings"), formDataCopy);
+    // Update listing
+    const docRef = doc(db, "listings", params.listingId);
+    await updateDoc(docRef, formDataCopy);
     setLoading(false);
     toast.success("Listing saved");
     navigate(`/category/${formDataCopy.type}/${docRef.id}`);
@@ -212,10 +244,11 @@ const CreateListing = () => {
   if (loading) {
     return <Spinner />;
   }
+
   return (
     <div className="profile">
       <header>
-        <p className="pageHeader">Create a Listing</p>
+        <p className="pageHeader">Edit Listing</p>
       </header>
 
       <main>
@@ -228,7 +261,6 @@ const CreateListing = () => {
               id="type"
               value="sale"
               onClick={onMutate}
-              style={{ cursor: "pointer" }}
             >
               Sell
             </button>
@@ -238,7 +270,6 @@ const CreateListing = () => {
               id="type"
               value="rent"
               onClick={onMutate}
-              style={{ cursor: "pointer" }}
             >
               Rent
             </button>
@@ -295,7 +326,6 @@ const CreateListing = () => {
               onClick={onMutate}
               min="1"
               max="50"
-              style={{ cursor: "pointer" }}
             >
               Yes
             </button>
@@ -307,7 +337,6 @@ const CreateListing = () => {
               id="parking"
               value={false}
               onClick={onMutate}
-              style={{ cursor: "pointer" }}
             >
               No
             </button>
@@ -321,7 +350,6 @@ const CreateListing = () => {
               id="furnished"
               value={true}
               onClick={onMutate}
-              style={{ cursor: "pointer" }}
             >
               Yes
             </button>
@@ -335,7 +363,6 @@ const CreateListing = () => {
               id="furnished"
               value={false}
               onClick={onMutate}
-              style={{ cursor: "pointer" }}
             >
               No
             </button>
@@ -386,7 +413,6 @@ const CreateListing = () => {
               id="offer"
               value={true}
               onClick={onMutate}
-              style={{ cursor: "pointer" }}
             >
               Yes
             </button>
@@ -398,7 +424,6 @@ const CreateListing = () => {
               id="offer"
               value={false}
               onClick={onMutate}
-              style={{ cursor: "pointer" }}
             >
               No
             </button>
@@ -434,7 +459,7 @@ const CreateListing = () => {
               />
             </>
           )}
-
+          {/* 
           <label className="formLabel">Images</label>
           <p className="imagesInfo">
             The first image will be the cover (max 6).
@@ -447,15 +472,9 @@ const CreateListing = () => {
             max="6"
             accept=".jpg,.png,.jpeg"
             multiple
-            required
-            style={{ cursor: "pointer" }}
-          />
-          <button
-            type="submit"
-            className="primaryButton createListingButton"
-            style={{ cursor: "pointer" }}
-          >
-            Create Listing
+          /> */}
+          <button type="submit" className="primaryButton createListingButton">
+            Edit Listing
           </button>
         </form>
       </main>
@@ -463,4 +482,4 @@ const CreateListing = () => {
   );
 };
 
-export default CreateListing;
+export default EditListing;
