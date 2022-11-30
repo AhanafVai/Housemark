@@ -249,7 +249,7 @@ const EditListing = () => {
   return (
     <div className="profile">
       <Helmet>
-        <title>Edit listing</title>
+        <title>Edit listing: {name}</title>
         <meta name="description" content="Edit Listing" />
         <meta name="keywords" content="Edit ,Listing,Rent,Housing,Sale" />
       </Helmet>
