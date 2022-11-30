@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -18,6 +19,13 @@ import SignUp from "./Pages/SignUp";
 const App = () => {
   return (
     <>
+      <Helmet>
+        <title>Explore</title>
+        <meta
+          name="description"
+          content="A one stop solution for you housing problems"
+        />
+      </Helmet>
       <Router>
         <Routes>
           <Route exact path="/" element={<Explore />} />
