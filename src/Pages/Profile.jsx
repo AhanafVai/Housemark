@@ -10,6 +10,7 @@ import {
   where,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import homeIcon from "../assets/svg/homeIcon.svg";
@@ -106,13 +107,17 @@ const Profile = () => {
 
   return (
     <div className="profile">
+      <Helmet>
+        <title>Profile: {name}</title>
+        <meta name="author" content={name} />
+        <meta name="keywords" content="Offer,Rent,Housing,Sell" />
+      </Helmet>
       <header className="profileHeader">
         <p className="pageHeader">My Profile</p>
         <button type="button" className="logOut" onClick={onLogout}>
           Logout
         </button>
       </header>
-
       <main>
         <div className="profileDetailsHeader">
           <p className="profileDetailsText">Personal Details</p>

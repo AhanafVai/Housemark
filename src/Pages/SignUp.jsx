@@ -5,6 +5,7 @@ import {
 } from "firebase/auth";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import React, { useState } from "react";
+import { Helmet } from "react-helmet";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ReactComponent as ArrowRightIcon } from "../assets/svg/keyboardArrowRightIcon.svg";
@@ -61,6 +62,11 @@ const SignUp = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Sign-up</title>
+        <meta name="description" content="Sign-up to seal the deal" />
+        <meta name="keywords" content="sign-up,authentication ,user" />
+      </Helmet>
       <div className="pageContainer">
         <header>
           <p className="pageHeader">Welcome Back!</p>

@@ -7,6 +7,7 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { useEffect, useRef, useState } from "react";
+import { Helmet } from "react-helmet";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
@@ -247,6 +248,11 @@ const EditListing = () => {
 
   return (
     <div className="profile">
+      <Helmet>
+        <title>Edit listing</title>
+        <meta name="description" content="Edit Listing" />
+        <meta name="keywords" content="Edit ,Listing,Rent,Housing,Sale" />
+      </Helmet>
       <header>
         <p className="pageHeader">Edit Listing</p>
       </header>

@@ -7,6 +7,7 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { useEffect, useRef, useState } from "react";
+import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
@@ -214,10 +215,14 @@ const CreateListing = () => {
   }
   return (
     <div className="profile">
+      <Helmet>
+        <title>Create Listing</title>
+        <meta name="description" content="Create Listing for ren or sale" />
+        <meta name="keywords" content="Create Listing,Rent,Housing,Sale" />
+      </Helmet>
       <header>
         <p className="pageHeader">Create a Listing</p>
       </header>
-
       <main>
         <form onSubmit={onSubmit}>
           <label className="formLabel">Sell / Rent</label>

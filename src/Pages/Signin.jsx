@@ -1,5 +1,6 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
+import { Helmet } from "react-helmet";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ReactComponent as ArrowRightIcon } from "../assets/svg/keyboardArrowRightIcon.svg";
@@ -46,6 +47,11 @@ const Signin = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Sign-in</title>
+        <meta name="description" content="Sign-in to seal the deal" />
+        <meta name="keywords" content="sign-in,authentication ,user" />
+      </Helmet>
       <div className="pageContainer">
         <header>
           <p className="pageHeader">Welcome Back!</p>

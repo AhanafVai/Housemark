@@ -1,5 +1,6 @@
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ReactComponent as ArrowRightIcon } from "../assets/svg/keyboardArrowRightIcon.svg";
@@ -22,6 +23,11 @@ const ForgetPassword = () => {
 
   return (
     <div className="pageContainer">
+      <Helmet>
+        <title>Forgot Password</title>
+        <meta name="description" content="Reset you password" />
+        <meta name="keywords" content="User,authentication,password,reset" />
+      </Helmet>
       <header>
         <p className="pageHeader">Forgot Password</p>
       </header>

@@ -1,5 +1,6 @@
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { useParams, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { db } from "../firebase.config";
@@ -31,6 +32,13 @@ function Contact() {
 
   return (
     <div className="pageContainer">
+      <Helmet>
+        <title>Contact</title>
+        <meta name="description" content="Seal the deal" />
+
+        <meta name="author" content={landlord?.name}></meta>
+        <meta name="keywords" content="Landlord,contact,Housing,Sale" />
+      </Helmet>
       <header>
         <p className="pageHeader">Contact Landlord</p>
       </header>

@@ -8,6 +8,7 @@ import {
   where,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import ListingItem from "../components/ListingItem";
@@ -99,6 +100,20 @@ function Category() {
 
   return (
     <div className="category">
+      {params.categoryName === "rent" ? (
+        <Helmet>
+          <title>Places for Rent</title>
+          <meta name="description" content="Explore all rents option" />
+          <meta name="keywords" content="Category,Rent,Housing,Sale" />
+        </Helmet>
+      ) : (
+        <Helmet>
+          <title>Places for Sale</title>
+          <meta name="description" content="Get the best deal" />
+          <meta name="keywords" content="Category,Rent,Housing,Sale" />
+        </Helmet>
+      )}
+
       <header>
         <p className="pageHeader">
           {params.categoryName === "rent"

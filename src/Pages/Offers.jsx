@@ -8,6 +8,7 @@ import {
   where,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { toast } from "react-toastify";
 import ListingItem from "../components/ListingItem";
 import Spinner from "../components/Spinner";
@@ -96,6 +97,11 @@ function Offers() {
 
   return (
     <div className="category">
+      <Helmet>
+        <title>Offers</title>
+        <meta name="description" content="Get the best offers available" />
+        <meta name="keywords" content="Offer,Rent,Housing,Sale" />
+      </Helmet>
       <header>
         <p className="pageHeader">Offers</p>
       </header>
